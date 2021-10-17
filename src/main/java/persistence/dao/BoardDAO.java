@@ -19,9 +19,9 @@ public class BoardDAO {
         List<BoardDTO> boardDTOs = new ArrayList<>();
 
         try{
-            //Class.forName("com.mysql.cj.jdbc.Driver");
-            //String url = "jdbc:mysql://localhost/mydb?characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
-            //conn = DriverManager.getConnection(url, "root", "sungryulKim12");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost/mydb?characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
+            conn = DriverManager.getConnection(url, "root", "qwqw1212");
             conn = ds.getConnection();
             conn.setAutoCommit(false);
 
@@ -32,7 +32,7 @@ public class BoardDAO {
                 Long id = rs.getLong("board_id");
                 String title = rs.getString("title");
                 String writer = rs.getString("writer");
-                String content = rs.getString("contents");
+                String content = rs.getString("content");
                 LocalDateTime regDate = rs.getTimestamp("regdate").toLocalDateTime();
                 int hit = rs.getInt(6);
                 boardDTO.setId(id);
@@ -44,7 +44,7 @@ public class BoardDAO {
                 boardDTOs.add(boardDTO);
                 conn.commit();
             }
-        } catch(SQLException e){
+        } catch(SQLException | ClassNotFoundException e){
             System.out.println("error : " + e);
             try {
                 conn.rollback();
