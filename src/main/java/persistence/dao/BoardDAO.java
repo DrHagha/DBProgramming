@@ -19,9 +19,6 @@ public class BoardDAO {
         List<BoardDTO> boardDTOs = new ArrayList<>();
 
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost/mydb?characterEncoding=utf8&serverTimezone=UTC&useSSL=false";
-            conn = DriverManager.getConnection(url, "root", "qwqw1212");
             conn = ds.getConnection();
             conn.setAutoCommit(false);
 
@@ -44,7 +41,7 @@ public class BoardDAO {
                 boardDTOs.add(boardDTO);
                 conn.commit();
             }
-        } catch(SQLException | ClassNotFoundException e){
+        } catch(SQLException e){
             System.out.println("error : " + e);
             try {
                 conn.rollback();
